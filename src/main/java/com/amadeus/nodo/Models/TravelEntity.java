@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 
-public class HostingEntity {
+public class TravelEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private Integer id;
