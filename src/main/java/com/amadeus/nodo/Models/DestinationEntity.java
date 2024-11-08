@@ -13,4 +13,9 @@ public class DestinationEntity {
     private int id;
     @Getter
     private String name;
+
+    public DestinationEntity(String name) {
+        this.name = name;
+    }
+    public DestinationEntity() {}
 }
