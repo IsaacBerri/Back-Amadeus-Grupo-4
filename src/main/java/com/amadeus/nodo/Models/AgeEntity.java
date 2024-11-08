@@ -5,8 +5,6 @@ import lombok.*;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 
 public class AgeEntity {
@@ -14,4 +12,13 @@ public class AgeEntity {
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private Integer id;
     public String name;
+
+    public AgeEntity(String name) {
+        this.name = name;
+    }
+
+    public AgeEntity() {
+    }
+
+
 }
