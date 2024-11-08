@@ -4,14 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class UserEntity {
 
@@ -22,5 +19,14 @@ public class UserEntity {
     @Getter
     private String name;
     private String email;
+
+    public UserEntity(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    public UserEntity(){
+
+    }
 
 }
