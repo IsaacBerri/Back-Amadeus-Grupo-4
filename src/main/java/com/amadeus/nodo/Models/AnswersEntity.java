@@ -9,34 +9,43 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 
-public class RespuestasEntity {
+public class AnswersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @Getter
     private UserEntity user;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "destination_id")
+    @Getter
     private DestinationEntity destination;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "weather_id")
+    @Getter
     private WeatherEntity weather;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "activity_id")
-    private ActivityEntity  activity;
+    @Getter
+    private ActivityEntity activity;
 
-    //
+    @ManyToOne
+    @JoinColumn(name = "hosting_id")
+    @Getter
+    private HostingEntity hosting;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "age_id")
+    @Getter
     private AgeEntity age;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "travel_id")
+    @Getter
     private TravelEntity travel;
 }
