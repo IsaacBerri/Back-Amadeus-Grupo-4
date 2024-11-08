@@ -6,4 +6,9 @@ import jakarta.persistence.Entity;
 public class DestinationEntity {
     private int id;
     private String name;
+
+    public DestinationEntity(String name) {
+        this.name = name;
+    }
+    public DestinationEntity() {}
 }
