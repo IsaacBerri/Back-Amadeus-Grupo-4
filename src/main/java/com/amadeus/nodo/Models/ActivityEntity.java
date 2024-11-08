@@ -13,4 +13,10 @@ public class ActivityEntity {
         private int id;
         @Getter
         private String name;
+
+        public ActivityEntity(String name) {
+                this.name = name;
+        }
+
+        public ActivityEntity() {}
 }
