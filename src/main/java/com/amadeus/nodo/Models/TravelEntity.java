@@ -5,8 +5,6 @@ import lombok.*;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 
 public class TravelEntity {
@@ -14,4 +12,11 @@ public class TravelEntity {
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private Integer id;
     public String name;
+
+    public TravelEntity(String name) {
+        this.name = name;
+    }
+
+    public TravelEntity() {
+    }
 }
