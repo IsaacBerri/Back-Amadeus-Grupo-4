@@ -1,6 +1,6 @@
 package com.amadeus.nodo.Controllers;
 
-import com.amadeus.nodo.Models.Respuestas;
+import com.amadeus.nodo.Models.RespuestasEntity;
 import com.amadeus.nodo.Services.RespuestaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +14,16 @@ public class RespuestaController {
     private RespuestaService respuestaService;
 
     @GetMapping("/respuestas")
-    public List<Respuestas> findAll() {return respuestaService.findAll();}
+    public List<RespuestasEntity> findAll() {return respuestaService.findAll();}
 
     @GetMapping("/respuesta/{id}")
-        public Respuestas getById(@PathVariable Integer id) {
-        Optional<Respuestas> respuesta = respuestaService.findById(id);
+        public RespuestasEntity getById(@PathVariable Integer id) {
+        Optional<RespuestasEntity> respuesta = respuestaService.findById(id);
         return respuesta.orElse(null);
     }
 
     @PostMapping("/respuesta")
-        public Respuestas create(@RequestBody Respuestas respuesta) {
+        public RespuestasEntity create(@RequestBody RespuestasEntity respuesta) {
         return respuestaService.create(respuesta);
     }
     @DeleteMapping("/respuesta/{id}")

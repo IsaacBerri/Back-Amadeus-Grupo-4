@@ -1,6 +1,6 @@
 package com.amadeus.nodo.Services;
 
-import com.amadeus.nodo.Models.Respuestas;
+import com.amadeus.nodo.Models.RespuestasEntity;
 import com.amadeus.nodo.Repositories.RespuestasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +12,15 @@ public class RespuestaService {
     @Autowired
     private RespuestasRepository respuestaRepository;
 
-    public Respuestas create(Respuestas respuesta){
+    public RespuestasEntity create(RespuestasEntity respuesta){
         return respuestaRepository.save(respuesta);
     }
 
-    public List<Respuestas> findAll() {
+    public List<RespuestasEntity> findAll() {
         return respuestaRepository.findAll();
         }
 
-    public Optional<Respuestas> findById(Integer id) {
+    public Optional<RespuestasEntity> findById(Integer id) {
         return respuestaRepository.findById(id);
         }
 
