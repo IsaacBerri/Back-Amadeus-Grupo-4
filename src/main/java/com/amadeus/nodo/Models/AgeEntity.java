@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
-@Builder
 @Entity
-
 public class AgeEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)

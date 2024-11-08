@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
-@Builder
 @Entity
-
 public class TravelEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
