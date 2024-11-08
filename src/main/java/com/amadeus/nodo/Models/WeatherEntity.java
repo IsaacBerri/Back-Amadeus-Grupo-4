@@ -13,4 +13,9 @@ public class WeatherEntity {
         private int id;
         @Getter
         private String name;
+
+        public WeatherEntity(String name) {
+                this.name = name;
+        }
+        public WeatherEntity() {}
 }
