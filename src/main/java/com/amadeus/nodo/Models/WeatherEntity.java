@@ -6,4 +6,9 @@ import jakarta.persistence.Entity;
 public class WeatherEntity {
         private int id;
         private String name;
+
+        public WeatherEntity(String name) {
+                this.name = name;
+        }
+        public WeatherEntity() {}
 }
