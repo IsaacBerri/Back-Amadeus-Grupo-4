@@ -6,4 +6,10 @@ import jakarta.persistence.Entity;
 public class ActivityEntity {
         private int id;
         private String name;
+
+        public ActivityEntity(String name) {
+                this.name = name;
+        }
+
+        public ActivityEntity() {}
 }
