@@ -7,3 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HostingRepository extends JpaRepository<HostingEntity, Integer> {
 }
+
+//  Dell this line
