@@ -13,6 +13,11 @@ public class HostingEntity {
     private int id;
     @Getter
     private String name;
+
+    public HostingEntity(String name) {
+        this.name = name;
+    }
+    public HostingEntity() {}
 }
 
 //  Dell this line
