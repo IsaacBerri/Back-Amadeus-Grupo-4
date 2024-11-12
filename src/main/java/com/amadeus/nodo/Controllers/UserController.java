@@ -2,7 +2,7 @@ package com.amadeus.nodo.Controllers;
 
 import com.amadeus.nodo.Contracts.UserDTO;
 import com.amadeus.nodo.Models.UserEntity;
-import com.amadeus.nodo.Service.UserSevice;
+import com.amadeus.nodo.Services.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

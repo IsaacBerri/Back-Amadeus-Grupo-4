@@ -1,4 +1,4 @@
-package com.amadeus.nodo.Service;
+package com.amadeus.nodo.Services;
 
 import com.amadeus.nodo.Contracts.UserDTO;
 import com.amadeus.nodo.Models.UserEntity;
