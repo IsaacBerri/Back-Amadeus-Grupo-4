@@ -1,5 +1,6 @@
 package com.amadeus.nodo.Controllers;
 
+import com.amadeus.nodo.Contracts.UserDTO;
 import com.amadeus.nodo.Models.UserEntity;
 import com.amadeus.nodo.Service.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,18 @@ public class UserController {
     private UserSevice userSevice;
 
     @GetMapping("/users")
-    public List<UserEntity> findAll() {
+    public List<UserDTO> findAll() {
         return userSevice.findAll();
     }
 
     @GetMapping("/user/{id}")
-    public Optional<UserEntity> findById(@PathVariable int id) {
+    public Optional<UserDTO> findById(@PathVariable int id) {
         return userSevice.findById(id);
     }
 
     @PostMapping("/user")
-    public String create(@RequestBody UserEntity userEntity) {
-        userSevice.create(userEntity);
+    public String create(@RequestBody UserDTO userDTO) {
+        userSevice.create(userDTO);
         return "Usuario creado con exito";
     }
 
