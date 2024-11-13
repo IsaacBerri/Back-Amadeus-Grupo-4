@@ -28,9 +28,9 @@ public class  AnswersService {
     @Autowired
     private AgeRepository ageRepository;
 
-    public AnswersEntity create(AnswersDTO answerDTO){
+    public void create(AnswersDTO answerDTO){
         UserEntity userEntity = new UserEntity();
-        userEntity.setName(answerDTO.getName());
+        userEntity.setName(answerDTO.getUserName());
         userEntity.setEmail(answerDTO.getEmail());
         userEntity = GenericEntityService.findOrCreate(
                 userRepository,
@@ -91,14 +91,19 @@ public class  AnswersService {
         answersEntity.setTravel(travelEntity);
         answersEntity.setAge(ageEntity);
 
-        return answerRepository.save(answersEntity);
+        answerRepository.save(answersEntity);
     }
 
     public List<AnswersDTO> findAll() {
         return answerRepository.findAll().stream().map(answers -> {
             AnswersDTO answersDTO = new AnswersDTO();
-            answersDTO.setName(answers.getUser().getName());
+            answersDTO.setUserName(answers.getUser().getName());
             answersDTO.setEmail(answers.getUser().getEmail());
+            answersDTO.setDestination(answers.getDestination().getName());
+            answersDTO.setWeather(answers.getWeather().getName());
+            answersDTO.setActivity(answers.getActivity().getName());
+            answersDTO.setHosting(answers.getHosting().getName());
+            answersDTO.setAge(answers.getAge().getName());
             return answersDTO;
         }).collect(Collectors.toList());
     }
@@ -106,7 +111,7 @@ public class  AnswersService {
     public Optional<AnswersDTO> findById(int id) {
         Optional <AnswersEntity> answers = answerRepository.findById(id);
         AnswersDTO answersDTO = new AnswersDTO();
-        answersDTO.setName(answers.get().getUser().getName());
+        answersDTO.setUserName(answers.get().getUser().getName());
         answersDTO.setEmail(answers.get().getUser().getEmail());
         return Optional.of(answersDTO);
         }

@@ -25,8 +25,9 @@ public class AnswersController {
     }
 
     @PostMapping("/answer")
-        public AnswersEntity create(@RequestBody AnswersDTO answersDTO) {
-        return answersService.create(answersDTO);
+        public String create(@RequestBody AnswersDTO answersDTO) {
+        answersService.create(answersDTO);
+        return "la persona ha sido creada exitosamente";
     }
     @DeleteMapping("/answer/{id}")
         public void delete(@PathVariable Integer id) {
