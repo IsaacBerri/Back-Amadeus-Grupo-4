@@ -5,7 +5,6 @@ import lombok.*;
 
 @Data
 @Entity
-
 public class AgeEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
