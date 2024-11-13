@@ -1,15 +1,16 @@
 package com.amadeus.nodo.Services;
 
+import com.amadeus.nodo.Contracts.AnswersDTO;
 import com.amadeus.nodo.Models.*;
 import com.amadeus.nodo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class AnswersService {
+public class  AnswersService {
     @Autowired
     private AnswersRepository answerRepository;
     @Autowired
@@ -27,57 +28,57 @@ public class AnswersService {
     @Autowired
     private AgeRepository ageRepository;
 
-    public AnswersEntity create(AnswersEntity answer){
+    public AnswersEntity create(AnswersDTO answerDTO){
         UserEntity userEntity = new UserEntity();
-        userEntity.setName(answer.getUser().getName());
-        userEntity.setEmail(answer.getUser().getEmail());
+        userEntity.setName(answerDTO.getName());
+        userEntity.setEmail(answerDTO.getEmail());
         userEntity = GenericEntityService.findOrCreate(
                 userRepository,
-                existingUser -> existingUser.getEmail().equals(answer.getUser().getEmail()),
+                existingUser -> existingUser.getEmail().equals(answerDTO.getEmail()),
                 userEntity
         );
 
         DestinationEntity destinationEntity = new DestinationEntity();
-        destinationEntity.setName(answer.getDestination().getName());
+        destinationEntity.setName(answerDTO.getDestination());
         destinationEntity = GenericEntityService.findOrCreate(
                 destinationRepository,
-                existingDestination -> existingDestination.getName().equals(answer.getDestination().getName()),
+                existingDestination -> existingDestination.getName().equals(answerDTO.getDestination()),
                 destinationEntity
         );
 
         WeatherEntity weatherEntity = new WeatherEntity();
-        weatherEntity.setName(answer.getWeather().getName());
+        weatherEntity.setName(answerDTO.getWeather());
         weatherEntity = GenericEntityService.findOrCreate(
                 weatherRepository,
-                existingWeather -> existingWeather.getName().equals(answer.getWeather().getName()),
+                existingWeather -> existingWeather.getName().equals(answerDTO.getWeather()),
                 weatherEntity
         );
         ActivityEntity activityEntity = new ActivityEntity();
-        activityEntity.setName(answer.getActivity().getName());
+        activityEntity.setName(answerDTO.getActivity());
         activityEntity = GenericEntityService.findOrCreate(
                 activityRepository,
-                existingActivity -> existingActivity.getName().equals(answer.getActivity().getName()),
+                existingActivity -> existingActivity.getName().equals(answerDTO.getActivity()),
                 activityEntity
         );
         HostingEntity hostingEntity = new HostingEntity();
-        hostingEntity.setName(answer.getHosting().getName());
+        hostingEntity.setName(answerDTO.getHosting());
         hostingEntity = GenericEntityService.findOrCreate(
                 hostingRepository,
-                existingHosting -> existingHosting.getName().equals(answer.getHosting().getName()),
+                existingHosting -> existingHosting.getName().equals(answerDTO.getHosting()),
                 hostingEntity
         );
         TravelEntity travelEntity = new TravelEntity();
-        travelEntity.setName(answer.getTravel().getName());
+        travelEntity.setName(answerDTO.getTravel());
         travelEntity = GenericEntityService.findOrCreate(
                 travelRepository,
-                existingTravel -> existingTravel.getName().equals(answer.getTravel().getName()),
+                existingTravel -> existingTravel.getName().equals(answerDTO.getTravel()),
                 travelEntity
         );
         AgeEntity ageEntity = new AgeEntity();
-        ageEntity.setName(answer.getAge().getName());
+        ageEntity.setName(answerDTO.getAge());
         ageEntity = GenericEntityService.findOrCreate(
                 ageRepository,
-                existingAge -> existingAge.getName().equals(answer.getAge().getName()),
+                existingAge -> existingAge.getName().equals(answerDTO.getAge()),
                 ageEntity
         );
 
@@ -93,10 +94,21 @@ public class AnswersService {
         return answerRepository.save(answersEntity);
     }
 
-    public List<AnswersEntity> findAll() {return answerRepository.findAll();}
+    public List<AnswersDTO> findAll() {
+        return answerRepository.findAll().stream().map(answers -> {
+            AnswersDTO answersDTO = new AnswersDTO();
+            answersDTO.setName(answers.getUser().getName());
+            answersDTO.setEmail(answers.getUser().getEmail());
+            return answersDTO;
+        }).collect(Collectors.toList());
+    }
 
-    public Optional<AnswersEntity> findById(Integer id) {
-        return answerRepository.findById(id);
+    public Optional<AnswersDTO> findById(int id) {
+        Optional <AnswersEntity> answers = answerRepository.findById(id);
+        AnswersDTO answersDTO = new AnswersDTO();
+        answersDTO.setName(answers.get().getUser().getName());
+        answersDTO.setEmail(answers.get().getUser().getEmail());
+        return Optional.of(answersDTO);
         }
 
     public void deleteById(Integer id) {
