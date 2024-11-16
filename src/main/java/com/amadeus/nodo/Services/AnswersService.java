@@ -1,6 +1,7 @@
 package com.amadeus.nodo.Services;
 
 import com.amadeus.nodo.Contracts.AnswersDTO;
+import com.amadeus.nodo.Mappers.AnswersMapper;
 import com.amadeus.nodo.Models.*;
 import com.amadeus.nodo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,12 @@ public class  AnswersService {
 
     public void create(AnswersDTO answerDTO){
         UserEntity userEntity = new UserEntity();
-        userEntity.setName(answerDTO.getUserName());
-        userEntity.setEmail(answerDTO.getEmail());
+        userEntity.setName(answerDTO.getUserDTO().getName());
+        userEntity.setEmail(answerDTO.getUserDTO().getEmail());
         userEntity = GenericEntityService.findOrCreate(
                 userRepository,
-                existingUser -> existingUser.getEmail().equals(answerDTO.getEmail()),
+                existingUser -> existingUser.getEmail().equals(answerDTO.getUserDTO().getEmail()),
+                existingUser -> existingUser.getName().equals(answerDTO.getUserDTO().getName()),
                 userEntity
         );
 
@@ -95,26 +97,13 @@ public class  AnswersService {
     }
 
     public List<AnswersDTO> findAll() {
-        return answerRepository.findAll().stream().map(answers -> {
-            AnswersDTO answersDTO = new AnswersDTO();
-            answersDTO.setUserName(answers.getUser().getName());
-            answersDTO.setEmail(answers.getUser().getEmail());
-            answersDTO.setDestination(answers.getDestination().getName());
-            answersDTO.setWeather(answers.getWeather().getName());
-            answersDTO.setActivity(answers.getActivity().getName());
-            answersDTO.setHosting(answers.getHosting().getName());
-            answersDTO.setAge(answers.getAge().getName());
-            return answersDTO;
-        }).collect(Collectors.toList());
+        return answerRepository.findAll().stream().map(AnswersMapper::toDTO).collect(Collectors.toList());
     }
 
     public Optional<AnswersDTO> findById(int id) {
-        Optional <AnswersEntity> answers = answerRepository.findById(id);
-        AnswersDTO answersDTO = new AnswersDTO();
-        answersDTO.setUserName(answers.get().getUser().getName());
-        answersDTO.setEmail(answers.get().getUser().getEmail());
-        return Optional.of(answersDTO);
-        }
+        Optional<AnswersEntity> answer = answerRepository.findById(id);
+        return Optional.of(AnswersMapper.toDTO(answer.orElse(null)));
+    }
 
     public void deleteById(Integer id) {
         answerRepository.deleteById(id);

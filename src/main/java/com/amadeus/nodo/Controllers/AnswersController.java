@@ -1,13 +1,15 @@
 package com.amadeus.nodo.Controllers;
 
 import com.amadeus.nodo.Contracts.AnswersDTO;
-import com.amadeus.nodo.Models.AnswersEntity;
 import com.amadeus.nodo.Services.AnswersService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 public class AnswersController {
 
@@ -15,23 +17,26 @@ public class AnswersController {
     private AnswersService answersService;
 
     @GetMapping("/answers")
-    public List<AnswersDTO> findAll()
-    {return answersService.findAll();}
+    public  ResponseEntity<List<AnswersDTO>> findAll()
+    {
+        return ResponseEntity.ok(answersService.findAll());
+    }
 
     @GetMapping("/answer/{id}")
-        public AnswersDTO getById(@PathVariable Integer id) {
+        public ResponseEntity<Optional<AnswersDTO>> getById(@PathVariable Integer id) {
         Optional<AnswersDTO> answer = answersService.findById(id);
-        return answer.orElse(null);
+        return ResponseEntity.ok(answer);
     }
 
     @PostMapping("/answer")
-        public String create(@RequestBody AnswersDTO answersDTO) {
+        public ResponseEntity<String> create(@RequestBody @Valid AnswersDTO answersDTO) {
         answersService.create(answersDTO);
-        return "la persona ha sido creada exitosamente";
+        return ResponseEntity.ok("the person was created successfully") ;
     }
     @DeleteMapping("/answer/{id}")
-        public void delete(@PathVariable Integer id) {
+        public ResponseEntity<String> delete(@PathVariable Integer id) {
         answersService.deleteById(id);
+        return ResponseEntity.ok("The person has been successfully deleted");
     }
 
 }

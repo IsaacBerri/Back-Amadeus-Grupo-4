@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 public class AnswersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
