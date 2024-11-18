@@ -1,9 +1,10 @@
 package com.amadeus.nodo.Controllers;
 
 import com.amadeus.nodo.Contracts.UserDTO;
-import com.amadeus.nodo.Models.UserEntity;
 import com.amadeus.nodo.Services.UserSevice;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,25 +17,26 @@ public class UserController {
     private UserSevice userSevice;
 
     @GetMapping("/users")
-    public List<UserDTO> findAll() {
-        return userSevice.findAll();
+    public ResponseEntity<List<UserDTO>> findAll() {
+        return ResponseEntity.ok(userSevice.findAll());
     }
 
     @GetMapping("/user/{id}")
-    public Optional<UserDTO> findById(@PathVariable int id) {
-        return userSevice.findById(id);
+    public ResponseEntity<Optional<UserDTO>> findById(@PathVariable int id) {
+        Optional<UserDTO> user = userSevice.findById(id);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/user")
-    public String create(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<String> create(@RequestBody @Valid UserDTO userDTO) {
         userSevice.create(userDTO);
-        return "Usuario creado con exito";
+        return ResponseEntity.ok("User created successfully");
     }
 
     @DeleteMapping("/user/{id}")
-    public String delete(@PathVariable int id) {
+    public ResponseEntity<String> delete(@PathVariable int id) {
         userSevice.delete(id);
-        return "Usuario eliminado con exito";
+        return ResponseEntity.ok("User deleted successfully");
     }
 
 }
