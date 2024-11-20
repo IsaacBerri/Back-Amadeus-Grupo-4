@@ -1,9 +1,11 @@
 package com.amadeus.nodo.Services;
 
 import com.amadeus.nodo.Contracts.AnswersDTO;
+import com.amadeus.nodo.Contracts.Mongo.DestinationsDTO;
 import com.amadeus.nodo.Mappers.AnswersMapper;
 import com.amadeus.nodo.Models.*;
 import com.amadeus.nodo.Repositories.*;
+import com.amadeus.nodo.Services.Mongo.DestinationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -29,7 +31,10 @@ public class  AnswersService {
     @Autowired
     private AgeRepository ageRepository;
 
-    public void create(AnswersDTO answerDTO){
+    @Autowired
+    private DestinationsService destinationsService;
+
+    public DestinationsDTO create(AnswersDTO answerDTO){
         UserEntity userEntity = new UserEntity();
         userEntity.setName(answerDTO.getUserDTO().getName());
         userEntity.setEmail(answerDTO.getUserDTO().getEmail());
@@ -94,6 +99,7 @@ public class  AnswersService {
         answersEntity.setAge(ageEntity);
 
         answerRepository.save(answersEntity);
+        return destinationsService.find(answerDTO);
     }
 
     public List<AnswersDTO> findAll() {
