@@ -16,4 +16,14 @@ public class GenericEntityService {
         Optional<T> existingEntity = repository.findAll().stream().filter(existsPredicate::apply).findFirst();
         return existingEntity.orElseGet(()->repository.save(entity));
     }
+
+    public static <T> T findOrCreate(
+            JpaRepository<T,Integer> repository,
+            Function<T, Boolean> existsPredicate,
+            Function<T, Boolean> existsPredicate2,
+            T entity
+    ){
+        Optional<T> existingEntity = repository.findAll().stream().filter(e -> existsPredicate.apply(e) && existsPredicate2.apply(e)).findFirst();
+        return existingEntity.orElseGet(()->repository.save(entity));
+    }
 }

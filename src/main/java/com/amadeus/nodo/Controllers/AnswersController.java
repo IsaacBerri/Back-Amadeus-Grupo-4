@@ -1,6 +1,7 @@
 package com.amadeus.nodo.Controllers;
 
 import com.amadeus.nodo.Contracts.AnswersDTO;
+import com.amadeus.nodo.Contracts.Mongo.DestinationsDTO;
 import com.amadeus.nodo.Services.AnswersService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 public class AnswersController {
 
@@ -28,12 +30,11 @@ public class AnswersController {
     }
 
     @PostMapping("/answer")
-    public ResponseEntity<String> create(@RequestBody @Valid AnswersDTO answersDTO) {
-        answersService.create(answersDTO);
-        return ResponseEntity.ok("the person was created successfully") ;
+        public ResponseEntity<DestinationsDTO> create(@RequestBody @Valid AnswersDTO answersDTO) {
+        return ResponseEntity.ok(answersService.create(answersDTO)) ;
     }
     @DeleteMapping("/answer/{id}")
-    public ResponseEntity<String> delete(@PathVariable Integer id) {
+        public ResponseEntity<String> delete(@PathVariable Integer id) {
         answersService.deleteById(id);
         return ResponseEntity.ok("The person has been successfully deleted");
     }
