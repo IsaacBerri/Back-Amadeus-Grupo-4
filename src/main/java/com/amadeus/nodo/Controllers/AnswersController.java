@@ -18,13 +18,13 @@ public class AnswersController {
     private AnswersService answersService;
 
     @GetMapping("/answers")
-    public  ResponseEntity<List<AnswersDTO>> findAll()
+    public ResponseEntity<List<AnswersDTO>> findAll()
     {
         return ResponseEntity.ok(answersService.findAll());
     }
 
     @GetMapping("/answer/{id}")
-        public ResponseEntity<Optional<AnswersDTO>> getById(@PathVariable Integer id) {
+    public ResponseEntity<Optional<AnswersDTO>> getById(@PathVariable Integer id) {
         Optional<AnswersDTO> answer = answersService.findById(id);
         return ResponseEntity.ok(answer);
     }
@@ -38,5 +38,4 @@ public class AnswersController {
         answersService.deleteById(id);
         return ResponseEntity.ok("The person has been successfully deleted");
     }
-
 }
