@@ -5,7 +5,6 @@ import com.amadeus.nodo.Contracts.UserDTO;
 import com.amadeus.nodo.Models.AnswersEntity;
 
 public class AnswersMapper {
-
     public static AnswersDTO toDTO(AnswersEntity answersEntity){
         AnswersDTO answersDTO = new AnswersDTO();
         UserDTO userDTO = new UserDTO();
