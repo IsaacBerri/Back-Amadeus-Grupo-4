@@ -11,24 +11,13 @@ public class DestinationsDTO {
     private Destinity destinationEuropa;
 
     @JsonSerialize
+    @Getter
+    @Setter
     public static class Destinity {
         private String site;
         private String country;
-
-        public String getSite() {
-            return site;
-        }
-
-        public void setSite(String site) {
-            this.site = site;
-        }
-
-        public String getCountry() {
-            return country;
-        }
-
-        public void setCountry(String country) {
-            this.country = country;
-        }
+        private String language;
+        private String unmissablePlace;
+        private String typicalFood;
     }
 }
