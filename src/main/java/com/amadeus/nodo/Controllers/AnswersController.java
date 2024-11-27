@@ -33,6 +33,7 @@ public class AnswersController {
         public ResponseEntity<DestinationsDTO> create(@RequestBody @Valid AnswersDTO answersDTO) {
         return ResponseEntity.ok(answersService.create(answersDTO)) ;
     }
+
     @DeleteMapping("/answer/{id}")
         public ResponseEntity<String> delete(@PathVariable Integer id) {
         answersService.deleteById(id);
