@@ -8,5 +8,4 @@ public class AmadeusNodoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AmadeusNodoApplication.class, args);
 	}
-
 }
